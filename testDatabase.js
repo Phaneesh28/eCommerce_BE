@@ -1,0 +1,26 @@
+require('dotenv').config();
+const mongoose = require('mongoose');
+const Product = require('./models/products');
+
+// Connect to MongoDB
+const MONGO_URI = process.env.MONGO_URI;
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('MongoDB Connection Error:', err.message));
+
+// Fetch Products
+const fetchProducts = async () => {
+  try {
+    const products = await Product.find({});
+    console.log('Products:', products);
+  } catch (err) {
+    console.error('Error fetching products:', err.message);
+  } finally {
+    mongoose.connection.close(); // Close the connection after testing
+  }
+};
+
+fetchProducts();

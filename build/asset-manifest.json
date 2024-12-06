@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.87ada461.css",
+    "main.js": "/static/js/main.6fbd6c77.js",
+    "static/media/polygon-scatter-haikei.png": "/static/media/polygon-scatter-haikei.75785b99ec1e3f69ed47.png",
+    "static/media/wave-haikeiInvert.png": "/static/media/wave-haikeiInvert.c5b5f139c91d9b8582a8.png",
+    "static/media/wave-haikei_3.png": "/static/media/wave-haikei_3.2b0c3b0a095b7788b4a2.png",
+    "index.html": "/index.html",
+    "main.87ada461.css.map": "/static/css/main.87ada461.css.map",
+    "main.6fbd6c77.js.map": "/static/js/main.6fbd6c77.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.87ada461.css",
+    "static/js/main.6fbd6c77.js"
+  ]
+}
