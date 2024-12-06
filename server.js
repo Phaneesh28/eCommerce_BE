@@ -91,19 +91,38 @@ app.get('/', (req, res) => {
 app.post('/api/register', async (req, res) => {
   try {
     const { username, email, phone, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const checkUser = await userData.findOne({ username });
-    if (checkUser) {
-      return res.status(422).send('User Already Exists');
+
+    // Check for existing user with the same phone number
+    const existingUser = await userData.findOne({ phone });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Phone number already registered' });
     }
-    const newUser = new userData({ username, email, phone, password: hashedPassword });
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create and save the new user
+    const newUser = new userData({
+      username,
+      email,
+      phone,
+      password: hashedPassword,
+    });
     await newUser.save();
-    res.status(201).send('Registered Successfully');
+
+    res.status(201).json({ message: 'Registration successful!' });
   } catch (error) {
     console.error('Error in /api/register:', error.message);
-    res.status(500).send('Internal Server Error');
+
+    // Handle duplicate key errors explicitly
+    if (error.code === 11000) {
+      return res.status(400).json({ message: 'Duplicate key error' });
+    }
+
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
 
 app.post('/api/login', async (req, res) => {
   try {
