@@ -24,7 +24,7 @@ app.use(helmet());
 app.use(mongoSanitize());
 app.use(morgan('combined')); // Logs requests
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://your-frontend-url.com'],
+  origin: ['http://localhost:3000', 'https://ecommerce-fe-0jr6.onrender.com'],
   credentials: true,
 }));
 
